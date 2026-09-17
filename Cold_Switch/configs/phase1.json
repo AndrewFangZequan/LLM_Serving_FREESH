@@ -1,0 +1,75 @@
+{
+  "configuration_id": "phase1",
+  "start_commands": [],
+  "stop_commands": [],
+  "workers": [
+    {
+      "worker_id": "phase1-ss",
+      "ip": "phase1-ss.example.org",
+      "port": 8000,
+      "request_type": "short_prompt_short_response",
+      "weight": 1,
+      "tp_size": 2,
+      "gpu_ids": [
+        0,
+        1
+      ],
+      "health_url": "http://phase1-ss.example.org:8000/v1/models",
+      "monitor": {
+        "url": "http://phase1-ss.example.org:9100",
+        "required": true
+      }
+    },
+    {
+      "worker_id": "phase1-sl",
+      "ip": "phase1-sl.example.org",
+      "port": 8000,
+      "request_type": "short_prompt_long_response",
+      "weight": 1,
+      "tp_size": 2,
+      "gpu_ids": [
+        0,
+        1
+      ],
+      "health_url": "http://phase1-sl.example.org:8000/v1/models",
+      "monitor": {
+        "url": "http://phase1-sl.example.org:9100",
+        "required": true
+      }
+    },
+    {
+      "worker_id": "phase1-ls",
+      "ip": "phase1-ls.example.org",
+      "port": 8000,
+      "request_type": "long_prompt_short_response",
+      "weight": 1,
+      "tp_size": 2,
+      "gpu_ids": [
+        0,
+        1
+      ],
+      "health_url": "http://phase1-ls.example.org:8000/v1/models",
+      "monitor": {
+        "url": "http://phase1-ls.example.org:9100",
+        "required": true
+      }
+    },
+    {
+      "worker_id": "phase1-ll",
+      "ip": "phase1-ll.example.org",
+      "port": 8000,
+      "request_type": "long_prompt_long_response",
+      "weight": 1,
+      "tp_size": 2,
+      "gpu_ids": [
+        0,
+        1
+      ],
+      "health_url": "http://phase1-ll.example.org:8000/v1/models",
+      "monitor": {
+        "url": "http://phase1-ll.example.org:9100",
+        "required": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+# Copy to /etc/systemd/system/vllm-phase2-ss.service on that worker's host.
+# Replace ALL paths/user/model/GPU values before installing. Use the corresponding
+# phase2-sl/ls/ll service name on the other hosts. Installing does not start vLLM.
+[Unit]
+Description=vLLM cold-switch experiment worker
+After=network-online.target
+
+[Service]
+Type=simple
+User=YOUR_USER
+WorkingDirectory=/ABS/PATH/LLM_Serving_FREESH/Cold_Switch
+Environment=CUDA_VISIBLE_DEVICES=0,1,2,3
+ExecStart=/ABS/PATH/VLLM_ENV/bin/python -m vllm.entrypoints.openai.api_server --model /ABS/PATH/MODEL --host 0.0.0.0 --port 8000 --tensor-parallel-size 4 --gpu-memory-utilization 0.9 --max-model-len 8192 --enforce-eager
+Restart=no

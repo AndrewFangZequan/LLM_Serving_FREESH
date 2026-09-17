@@ -1,0 +1,8 @@
+{
+  "router_url": "http://127.0.0.1:8010",
+  "health_timeout_seconds": 900,
+  "health_poll_interval_seconds": 2,
+  "status_poll_interval_seconds": 5,
+  "command_timeout_seconds": 60,
+  "ready_file": null
+}

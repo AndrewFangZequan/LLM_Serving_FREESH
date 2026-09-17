@@ -1,0 +1,127 @@
+{
+  "configuration_id": "phase2",
+  "start_commands": [],
+  "stop_commands": [],
+  "workers": [
+    {
+      "worker_id": "phase2-ss",
+      "ip": "phase2-ss.example.org",
+      "port": 8000,
+      "request_type": "short_prompt_short_response",
+      "weight": 1,
+      "tp_size": 4,
+      "gpu_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "health_url": "http://phase2-ss.example.org:8000/v1/models",
+      "monitor": {
+        "url": "http://phase2-ss.example.org:9100",
+        "required": true
+      },
+      "start_command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "phase2-ss.example.org",
+        "sudo",
+        "-n",
+        "systemctl",
+        "start",
+        "vllm-phase2-ss.service"
+      ]
+    },
+    {
+      "worker_id": "phase2-sl",
+      "ip": "phase2-sl.example.org",
+      "port": 8000,
+      "request_type": "short_prompt_long_response",
+      "weight": 1,
+      "tp_size": 4,
+      "gpu_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "health_url": "http://phase2-sl.example.org:8000/v1/models",
+      "monitor": {
+        "url": "http://phase2-sl.example.org:9100",
+        "required": true
+      },
+      "start_command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "phase2-sl.example.org",
+        "sudo",
+        "-n",
+        "systemctl",
+        "start",
+        "vllm-phase2-sl.service"
+      ]
+    },
+    {
+      "worker_id": "phase2-ls",
+      "ip": "phase2-ls.example.org",
+      "port": 8000,
+      "request_type": "long_prompt_short_response",
+      "weight": 1,
+      "tp_size": 4,
+      "gpu_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "health_url": "http://phase2-ls.example.org:8000/v1/models",
+      "monitor": {
+        "url": "http://phase2-ls.example.org:9100",
+        "required": true
+      },
+      "start_command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "phase2-ls.example.org",
+        "sudo",
+        "-n",
+        "systemctl",
+        "start",
+        "vllm-phase2-ls.service"
+      ]
+    },
+    {
+      "worker_id": "phase2-ll",
+      "ip": "phase2-ll.example.org",
+      "port": 8000,
+      "request_type": "long_prompt_long_response",
+      "weight": 1,
+      "tp_size": 4,
+      "gpu_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "health_url": "http://phase2-ll.example.org:8000/v1/models",
+      "monitor": {
+        "url": "http://phase2-ll.example.org:9100",
+        "required": true
+      },
+      "start_command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "phase2-ll.example.org",
+        "sudo",
+        "-n",
+        "systemctl",
+        "start",
+        "vllm-phase2-ll.service"
+      ]
+    }
+  ]
+}

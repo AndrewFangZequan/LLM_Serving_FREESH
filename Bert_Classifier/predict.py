@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import annotations
 import torch
 import torch.nn as nn
 from transformers import XLMRobertaTokenizer, XLMRobertaModel
@@ -82,9 +83,10 @@ class TokenCountPredictor:
     """
     A predictor that wraps a hierarchical Transformer regression model.
     """
-    def __init__(self, model_dir: str):
+    def __init__(self, model_dir: str, device: str | None = None):
         """
         Initialize the predictor, loading the model and tokenizer.
+        :param device: Optional device (e.g. cpu or cuda:1); None preserves automatic selection.
         :param model_dir: Directory that contains 'best_model.pt' and the tokenizer files.
         """
         logger.info(f"Initializing TokenCountPredictor...")
@@ -92,7 +94,7 @@ class TokenCountPredictor:
         if not os.path.exists(model_path):
             raise FileNotFoundError(f"Error: model checkpoint file 'best_model.pt' not found in '{model_dir}'.")
 
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.device = torch.device(device if device is not None else ("cuda" if torch.cuda.is_available() else "cpu"))
         self.config = CONFIG
         
         logger.info(f"Using device: {self.device}")
@@ -103,7 +105,7 @@ class TokenCountPredictor:
         self.model = HierarchicalModel(encoder_name=self.config['model_name'], num_labels=1)
         
         logger.info(f"Loading model weights from '{model_path}'...")
-        self.model.load_state_dict(torch.load(model_path, map_location=self.device))
+        self.model.load_state_dict(torch.load(model_path, map_location=self.device, weights_only=True))
         self.model.to(self.device)
         self.model.eval()
         logger.info("TokenCountPredictor initialization complete.")

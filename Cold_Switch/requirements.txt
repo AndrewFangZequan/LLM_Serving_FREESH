@@ -1,0 +1,8 @@
+# Router's built-in predictor (Python 3.10+)
+torch>=2.2
+transformers>=4.40,<5
+sentencepiece>=0.2
+numpy>=1.26
+# Monitor
+pandas>=2.2.3
+requests>=2.31

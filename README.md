@@ -16,3 +16,9 @@
 - **Plug-and-play**: integrates with common inference runtimes (e.g., vLLM) and multiple solvers (e.g., Gurobi / open-source backends).
 
 > Full method and evaluations: **https://arxiv.org/abs/2511.00807**
+
+## Cold-switch experiment
+
+See [Cold_Switch](Cold_Switch/README.md) for a runnable cold TP-switch experiment
+with online, replaceable output-length prediction, Monitor and MIAD. This experiment
+**does not implement LLF**; it is separate from the LLF simulation and pool optimizer.
